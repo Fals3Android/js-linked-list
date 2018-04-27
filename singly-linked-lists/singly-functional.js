@@ -20,12 +20,35 @@ function add(value) {
 		current.next = node; // Set the last pointer of the list
 		linkedList.nodes++;
 	}
-
-	return linkedList;
 }
 
 add({ foo: 'bar' });
 add({ foo: 'baz' });
 add({ foo: 'bag' });
 
-console.log(linkedList);
+/**
+ * Insert a value after a matched data value
+ * by modifying the new nodes pointer to equal
+ * the matched nodes pointer and then re-assigning 
+ * the new node to the matched nodes pointer
+ */
+function insertAfter(node, newNode) {
+	var current = linkedList.head;
+	while(current.next) {
+		if(current.data = node.data) {
+			// assign the matched nodes pointer to the new nodes pointer
+			newNode.next = current.next;
+			// reassign the matched nodes pointer to the newly modified node
+			current.next = newNode;
+			linkedList.nodes++;
+			break;
+		}
+	}
+}
+
+insertAfter(
+	{ data: { foo: 'bar' }, next: null }, 
+	{ data: { foo: 'xxx' }, next: null }
+);
+
+console.log(linkedList.nodes);
