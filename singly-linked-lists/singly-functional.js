@@ -3,28 +3,25 @@ var linkedList = { head: null, nodes: 0 };
 /**
  * Simple add function to sequentially 
  * insert new nodes to our linked list
+ * add a node if the list is empty otherwise
+ * find the next null pointer to append a node
  */
 function add(value) {
 	var node = { data: value, next: null };
 	var current = null;
 
 	if(!linkedList.head) {
-		linkedList.head = node; // add the first node
+		linkedList.head = node; 
 	} else {
-		current = linkedList.head // reference the first node
-		// iterate through each pointer in the list until we reach the end of the list
+		current = linkedList.head 
 		while(current.next) {
 			current = current.next; 
 			linkedList.nodes++;
 		}
-		current.next = node; // Set the last pointer of the list
+		current.next = node; 
 		linkedList.nodes++;
 	}
 }
-
-add({ foo: 'bar' });
-add({ foo: 'baz' });
-add({ foo: 'bag' });
 
 /**
  * Insert a value after a matched data value
@@ -35,20 +32,48 @@ add({ foo: 'bag' });
 function insertAfter(node, newNode) {
 	var current = linkedList.head;
 	while(current.next) {
-		if(current.data = node.data) {
-			// assign the matched nodes pointer to the new nodes pointer
+		if(current.data === node.data) {
 			newNode.next = current.next;
-			// reassign the matched nodes pointer to the newly modified node
 			current.next = newNode;
 			linkedList.nodes++;
 			break;
 		}
+		current = current.next;
 	}
 }
 
-insertAfter(
-	{ data: { foo: 'bar' }, next: null }, 
-	{ data: { foo: 'xxx' }, next: null }
-);
+/**
+ * Insert a new node at the beginning of a list,
+ * make that new node equal the first node in the list
+ * and return the new list
+ */
+function insertBeginning(list, newNode) {
+		newNode.next = list.head;
+		list.head = newNode;
+		list.nodes++;
+		return list;
+}
 
-console.log(linkedList.nodes);
+/**
+ * Remove a node after the specified node
+ */
+function removeAfter(node) {
+	var current = linkedList.head;
+	while(current.next) {
+		if(current.data === node.data) {
+			current.next = current.next.next;
+			linkedList.nodes--;
+			break;
+		}	
+		current = current.next;
+	}
+} 
+
+/**
+ * Remove a node from the beginning of the list
+ */
+function removeBeginning(list) {
+	list.head = list.head.next;
+	list.nodes--;
+	return list;
+}
