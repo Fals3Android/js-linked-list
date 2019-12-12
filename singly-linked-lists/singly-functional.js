@@ -12,6 +12,7 @@ function add(value) {
 
 	if(!linkedList.head) {
 		linkedList.head = node; 
+    linkedList.nodes++;
 	} else {
 		current = linkedList.head 
 		while(current.next) {
@@ -76,4 +77,13 @@ function removeBeginning(list) {
 	list.head = list.head.next;
 	list.nodes--;
 	return list;
+}
+
+module.exports = {
+  add,
+  insertAfter,
+  insertBeginning,
+  removeAfter,
+  removeBeginning,
+  linkedList
 }
